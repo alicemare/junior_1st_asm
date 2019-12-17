@@ -1,0 +1,49 @@
+     1                                  extern printf
+     2                                  
+     3                                  %macro pabc 1	; a simple print macro
+     4                                  	section .data
+     5                                  .str	db %1,0	;%1是要打印的字符串
+     6                                  	section .text
+     7                                  
+     8                                  	mov rdi, fmt	;address of format string
+     9                                  	mov rsi, .str
+    10                                  	movq xmm0, qword [a];first floating point in fmt
+    11                                  	movq xmm1, qword [b];second floating point in fmt
+    12                                  	movq xmm2, qword [c]
+    13                                  	mov rax, 3
+    14                                  	call printf
+    15                                  %endmacro
+    16                                  
+    17                                  section .data
+    18                                  
+    19 00000000 0000000000000840        a:	dq	3.0
+    20 00000008 0000000000001040        b:	dq	4.0
+    21 00000010 0000000000002040        i:	dq	8.0
+    22 00000018 25732C20613D25652C-     fmt:	db "%s, a=%e, b=%e,c=%e",10,0
+    22 00000021 20623D25652C633D25-
+    22 0000002A 650A00             
+    23                                  
+    24                                  section .bss
+    25 00000000 <res 00000008>          c:	resq 	1
+    26                                  
+    27                                  section .text
+    28                                  global main
+    29                                  main:
+    30 00000000 55                      	push rbp
+    31                                  	pabc "c=5.0"
+    31                              <1>  section .data
+    31 0000002D 633D352E3000        <1> .str db %1,0
+    31                              <1>  section .text
+    31                              <1> 
+    31 00000001 48BF-               <1>  mov rdi, fmt
+    31 00000003 [1800000000000000]  <1>
+    31 0000000B 48BE-               <1>  mov rsi, .str
+    31 0000000D [2D00000000000000]  <1>
+    31 00000015 F30F7E0425-         <1>  movq xmm0, qword [a]
+    31 0000001A [00000000]          <1>
+    31 0000001E F30F7E0C25-         <1>  movq xmm1, qword [b]
+    31 00000023 [08000000]          <1>
+    31 00000027 F30F7E1425-         <1>  movq xmm2, qword [c]
+    31 0000002C [00000000]          <1>
+    31 00000030 B803000000          <1>  mov rax, 3
+    31 00000035 E8(00000000)        <1>  call printf
