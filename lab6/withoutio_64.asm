@@ -3,10 +3,10 @@
 global main
 
 section .data
-a: dq 1.22
-b: dq 3.45
-c: dq 5.66
-x: dq 1.21
+a: dq 1.00
+b: dq 2.00
+c: dq 3.00
+x: dq 4.00
 
 section .bss
 res: resq 1
