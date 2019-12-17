@@ -1,0 +1,9 @@
+#! /bin/zsh
+# 执行nasm
+# 接受一个.asm作为源文件
+
+var=$(echo $1 | cut -d . -f1)
+obj=$var".o"
+nasm -felf -g $1
+gcc -m32 -o $var $obj
+

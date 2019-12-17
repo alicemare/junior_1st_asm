@@ -1,4 +1,5 @@
 extern printf
+extern scanf
 
 %macro pabc 1	; a simple print macro
 	section .data
@@ -20,7 +21,7 @@ a:	dq	3.0
 b:	dq	4.0
 i:	dq	8.0
 pfmt:	db "%s, a=%e, b=%e,c=%e",10,0
-sfmt:	db "%e",0
+sfmt:	db "%d",0
 section .bss
 c:	resq 	1
 
@@ -28,8 +29,15 @@ section .text
 global main
 main:
 	push rbp
-	mov rdi, sfmt
-	mov 
+	
+	;push rbp
+	;mov rdi, sfmt
+	;mov rsi, c
+	;mov al, 0
+	;call scanf
+
+	;pop rbp
+
 	pabc "c=5.0"
 
 	pop rbp
